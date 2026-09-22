@@ -1,5 +1,5 @@
 {
-  "name": "@joana/job-tracker-mcp",
+  "name": "@joana412/job-tracker-mcp",
   "version": "1.0.0",
   "description": "MCP server that lets an AI agent track my job applications",
   "repository": {
