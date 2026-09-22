@@ -1,0 +1,24 @@
+name: Publish to npm
+
+# Runs when you push a version tag such as v1.0.1
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write   # lets GitHub prove to npm which repo/workflow is publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - run: npm install -g npm@latest   # trusted publishing needs a recent npm
+      - run: npm ci
+      - run: npm test                    # test gate: nothing is published if tests fail
+      - run: npm publish --access public --provenance
